@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style type="text/css">
+		*{
+			text-align: center;
+			background-color:#88d2e8;
+		}
+
+		h2{
+			font-size: 50px;
+		}
+		h3{
+			font-size: 25px;
+		}
+		form{
+			margin: 20px;
+		}
+		img{
+
+			width: 800px;
+		}
+		input{
+			height: 40px;
+		}
+	</style>
+	<title>Weather Forecast</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(document).on('click','button',function(){
+				var weather=$('#user').val();
+				$.get('http://api.openweathermap.org/data/2.5/weather?q='+weather+',us&&appid=e970661fdcbfea2fdf9ac1cb35eed613', function(res){
+					$('h2').html(res.name);
+					 var fahrenheit=Math.round(1.8*(res.main.temp-273)+32);
+					$('h3').html('Temerature: '+fahrenheit+'&#8457;');
+
+					}, "json")
+				return false;
+			});
+			
+		});
+	</script>
+</head>
+<body>
+	<img src="top-weather.jpg">
+	<form>
+		<label>
+			<input type="text" name="weather" id="user">
+		</label>
+		<button>Search Weather</button>
+		
+	</form>
+	<h2></h2>
+	<h3></h3>
+
+</body>
+</html>
